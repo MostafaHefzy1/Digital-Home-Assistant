@@ -6,6 +6,7 @@ import '../../core/util/app_color.dart';
 import '../../../core/network/local/sharedpreference.dart';
 import '../../../core/shared_component/navigate.dart';
 import '../../../smart_home/presentation/screen/bottom_nav_bat.dart';
+import '../../smart_home/presentation/screen/setting/confrim_location.dart';
 import '../controller/auth_cubit.dart';
 import '../controller/auth_state.dart';
 import '../widget/button_google.dart';
@@ -30,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                 key: "nameUser", value: state.user.user!.displayName);
             CacheHelper.saveData(
                 key: "imageUser", value: state.user.user!.photoURL);
-            navigatorAndRemove(context, const BottomNavigatorBar());
+            navigatorAndRemove(context, const ConfrimLocation());
           }
           if (state is GoogleFailedState) {
             Navigator.pop(context);
