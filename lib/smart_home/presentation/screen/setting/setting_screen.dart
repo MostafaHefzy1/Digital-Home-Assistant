@@ -95,14 +95,17 @@ class SettingScreen extends StatelessWidget {
                   navigatorTo(context, SendEmail());
                 },
               ),
-              // CardComponent(
-              //   leadingText: "الموقع",
-              //   icon: const Icon(Icons.location_on_outlined,
-              //       color: AppColors.whiteColor, size: 50),
-              //   function: () {
-              //     navigatorTo(context, ConfrimLocation());
-              //   },
-              // ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CardComponent(
+                leadingText: "الموقع",
+                icon: const Icon(Icons.location_on_outlined,
+                    color: AppColors.whiteColor, size: 50),
+                function: () {
+                  navigatorTo(context, ConfrimLocation());
+                },
+              ),
             ],
           ),
         ),

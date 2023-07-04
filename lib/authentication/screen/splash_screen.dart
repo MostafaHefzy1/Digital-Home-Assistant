@@ -8,6 +8,7 @@ import '../../core/util/app_strings.dart';
 
 import '../../../core/network/local/sharedpreference.dart';
 import '../../../smart_home/presentation/screen/bottom_nav_bat.dart';
+import '../../smart_home/presentation/screen/setting/confrim_location.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -40,7 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
     if (CacheHelper.getData(key: "token") == null) {
       navigatorAndRemove(context, const LoginScreen());
     } else {
-      navigatorAndRemove(context, const BottomNavigatorBar());
+      print(CacheHelper.getData(key: "latitude"));
+      print(CacheHelper.getData(key: "longitude"));
+      if (CacheHelper.getData(key: "latitude") != null &&
+          CacheHelper.getData(key: "longitude") != null) {
+        navigatorTo(context, const BottomNavigatorBar());
+      } else {
+        navigatorAndRemove(context, const ConfrimLocation());
+      }
     }
   }
 

@@ -56,3 +56,8 @@ class GetNewsFailed extends  HomeState {}
 
 
 class SomeAndTempSuccessState extends  HomeState {}
+
+
+
+class GoToMapSuccessState  extends  HomeState {}
+class GoToMapFailedState  extends  HomeState {}

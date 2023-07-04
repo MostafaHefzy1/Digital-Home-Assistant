@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/network/local/sharedpreference.dart';
 import '../../../../core/shared_component/LoadingIndicator.dart';
 
 import '../../../../core/shared_component/custom_text_button.dart';
@@ -59,6 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
+                          CustomTextButton(
+                              function: () {
+                                print(CacheHelper.getData(key: "latitude"));
+                                print(CacheHelper.getData(key: "longitude"));
+                              },
+                              text: "text"),
                           const NameAndImageComponent(),
                           SizedBox(
                             height: 100.h,

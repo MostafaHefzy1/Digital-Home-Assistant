@@ -27,7 +27,6 @@ import '../../../core/models/news_model.dart';
 import '../../../core/models/smoke_model.dart';
 import '../../../core/models/weather_model.dart';
 import '../../../core/network/local/sharedpreference.dart';
-import '../../../core/network/provider/chat_gpt_provider.dart';
 import '../../../core/notfication/local_notification_for_remembe_training.dart';
 import '../../../core/util/app_strings.dart';
 import '../../data/repository.dart';
@@ -247,11 +246,14 @@ class HomeCubit extends Cubit<HomeState> {
         word.contains("اتصل") ||
         word.contains("كلم") ||
         word.contains("رساله")) {
-      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
       await searchWithContent(text: word);
 
       speak(text: "برجاء الانتظار قليلا");
-      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    } else if (word.contains("البيت") || word.contains("المنزل")) {
+      log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
+      await goToMaps(
+          latitude: CacheHelper.getData(key: "latitude").toString(),
+          longitude: CacheHelper.getData(key: "longitude").toString());
     }
   }
 
@@ -309,6 +311,21 @@ class HomeCubit extends Cubit<HomeState> {
               .set(true);
         }
       }
+    }
+  }
+
+  Future<void> goToMaps(
+      {required String latitude, required String longitude}) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=${double.parse(latitude)},${double.parse(longitude)}';
+    final String emcodeUrl = Uri.encodeFull(googleUrl);
+    log(emcodeUrl);
+    if (await canLaunch(emcodeUrl)) {
+      print("AAAAAAAAAAAAAAAAAAAAAA");
+      await launch(emcodeUrl);
+      emit(GoToMapSuccessState());
+    } else {
+      emit(GoToMapFailedState());
     }
   }
 }
