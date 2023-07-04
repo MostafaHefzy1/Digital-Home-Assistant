@@ -105,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       controller: chatTextController,
                       style: const TextStyle(color: Colors.black54),
                       decoration: const InputDecoration(
-                        hintText: "Write message...",
+                        hintText: "اكتب رسالة ...",
                         hintStyle: TextStyle(color: Colors.black54),
                         border: InputBorder.none,
                       ),
