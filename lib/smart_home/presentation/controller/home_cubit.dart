@@ -30,6 +30,7 @@ import '../../../core/network/local/sharedpreference.dart';
 import '../../../core/notfication/local_notification_for_remembe_training.dart';
 import '../../../core/util/app_strings.dart';
 import '../../data/repository.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepository homeRepository;
@@ -321,11 +322,24 @@ class HomeCubit extends Cubit<HomeState> {
     final String emcodeUrl = Uri.encodeFull(googleUrl);
     log(emcodeUrl);
     if (await canLaunch(emcodeUrl)) {
-      print("AAAAAAAAAAAAAAAAAAAAAA");
       await launch(emcodeUrl);
       emit(GoToMapSuccessState());
     } else {
       emit(GoToMapFailedState());
     }
   }
+
+  // ckeckLoacation({required String latitude, required String longitude}) async {
+  //   Position currentPosition = await Geolocator.getCurrentPosition(
+  //     desiredAccuracy: LocationAccuracy.high,
+  //   );
+  //   Distance distance = Distance(meters: 5);
+
+  //   double distanceInMeters = Geolocator.distanceBetween(
+  //       double.parse(latitude),
+  //       double.parse(longitude),
+  //       double.parse(latitude) + 1,
+  //       double.parse(longitude) + 1);
+  //   print("distanceInMeters $distanceInMeters");
+  // }
 }

@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/network/local/sharedpreference.dart';
 
 import '../../../core/util/app_color.dart';
 import '../../../core/util/app_strings.dart';
 import '../controller/home_cubit.dart';
 import '../controller/home_state.dart';
 
-class BottomNavigatorBar extends StatelessWidget {
+class BottomNavigatorBar extends StatefulWidget {
   const BottomNavigatorBar({Key? key}) : super(key: key);
 
   @override
+  State<BottomNavigatorBar> createState() => _BottomNavigatorBarState();
+}
+
+class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
+  // @override
+  // void initState() {
+  //       HomeCubit.get(context).ckeckLoacation(
+  //       latitude: CacheHelper.getData(key: "latitude").toString(),
+  //       longitude: CacheHelper.getData(key: "longitude").toString());
+  //   super.initState();
+  // }
+
+  @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         HomeCubit cubit = HomeCubit.get(context);
