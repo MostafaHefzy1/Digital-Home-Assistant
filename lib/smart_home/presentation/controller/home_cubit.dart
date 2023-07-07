@@ -220,9 +220,16 @@ class HomeCubit extends Cubit<HomeState> {
         await LocalNotificationForRememberTraining.init(
             title: AppStrings.titleNotification,
             body: AppStrings.bodyNotification);
-
-        await launchUrlString("tel:191");
-        await speak(text: "جاري الاتصال  برقم المطافي");
+        for (int i = 0; i < objectList.length; i++) {
+          FirebaseDatabase.instance
+              .ref()
+              .child('devices/${objectList[i].id}/isOpened')
+              .set(false);
+        }
+        Future.delayed(const Duration(milliseconds: 2000), () async {
+          await speak(text: "جاري الاتصال  برقم المطافي");
+          await launchUrlString("tel:191");
+        });
       }
 
       emit(SomeAndTempSuccessState());

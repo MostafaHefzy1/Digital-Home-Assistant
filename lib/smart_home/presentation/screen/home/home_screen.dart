@@ -126,9 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisSpacing: 15.0,
                             childAspectRatio: 1 / 1.15,
                             children: List.generate(
-                              cubit.objectList.length > 4
-                                  ? 4
-                                  : cubit.objectList.length,
+                              cubit.objectList.length,
                               (index) => DevicesComponent(
                                 devicesModel: cubit.objectList[index],
                               ),
