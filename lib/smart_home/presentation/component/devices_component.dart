@@ -52,7 +52,7 @@ class _DevicesComponentState extends State<DevicesComponent> {
                 widget.devicesModel.title,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
-              widget.devicesModel.title == "غرفه النوم"
+              widget.devicesModel.title == "الغرفه النوم"
                   ? Text(
                       " ° ${cubit.isSomkeModel!.bedroomTemp.toString()}",
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(
