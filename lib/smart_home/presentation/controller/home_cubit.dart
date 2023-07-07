@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:porcupine_flutter/porcupine_manager.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,7 +31,6 @@ import '../../../core/network/local/sharedpreference.dart';
 import '../../../core/notfication/local_notification_for_remembe_training.dart';
 import '../../../core/util/app_strings.dart';
 import '../../data/repository.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepository homeRepository;
@@ -59,6 +59,40 @@ class HomeCubit extends Cubit<HomeState> {
   void navigateToNextScreen(int index) {
     currentIndex = index;
     emit(NavigateToNextScreenSuccessState());
+  }
+
+  PorcupineManager? _porcupineManager;
+
+  void wakeWordCallback(int keywordIndex) async {
+    if (keywordIndex >= 0) {
+      await speak(text: "كيف أُساعِدُكْ");
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        startListening();
+      });
+    }
+  }
+
+  final String accessKey =
+      'AvuvJtDVeP3X0K0qOtNW7nzDuvWzNgMI6gmvDgkNlm0BmeChIEVasg==';
+
+  Future<void> loadKeyword() async {
+    if (_porcupineManager != null) {
+      await _porcupineManager?.delete();
+      _porcupineManager = null;
+    }
+
+    _porcupineManager = await PorcupineManager.fromKeywordPaths(
+      accessKey,
+      ["assets/voice/z-z.ppn"],
+      wakeWordCallback,
+    );
+  }
+
+  Future<void> startProcessing() async {
+    if (_porcupineManager == null) {
+      await loadKeyword();
+    }
+    await _porcupineManager?.start();
   }
 
   void startListening() async {
@@ -186,8 +220,9 @@ class HomeCubit extends Cubit<HomeState> {
         await LocalNotificationForRememberTraining.init(
             title: AppStrings.titleNotification,
             body: AppStrings.bodyNotification);
+
         await launchUrlString("tel:191");
-        await speak(text: "سوف يتم الاتصال  برقم المطافي");
+        await speak(text: "جاري الاتصال  برقم المطافي");
       }
 
       emit(SomeAndTempSuccessState());

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/network/local/sharedpreference.dart';
-
 import '../../../core/util/app_color.dart';
 import '../../../core/util/app_strings.dart';
 import '../controller/home_cubit.dart';
@@ -15,17 +13,17 @@ class BottomNavigatorBar extends StatefulWidget {
 }
 
 class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
-  // @override
-  // void initState() {
-  //       HomeCubit.get(context).ckeckLoacation(
-  //       latitude: CacheHelper.getData(key: "latitude").toString(),
-  //       longitude: CacheHelper.getData(key: "longitude").toString());
-  //   super.initState();
-  // }
+
+  
+
+  @override
+  void initState() {
+    HomeCubit.get(context).startProcessing();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         HomeCubit cubit = HomeCubit.get(context);

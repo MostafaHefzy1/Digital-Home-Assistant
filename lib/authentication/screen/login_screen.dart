@@ -5,7 +5,6 @@ import '../../core/shared_component/show_loading_indicator_f.unction.dart';
 import '../../core/util/app_color.dart';
 import '../../../core/network/local/sharedpreference.dart';
 import '../../../core/shared_component/navigate.dart';
-import '../../../smart_home/presentation/screen/bottom_nav_bat.dart';
 import '../../smart_home/presentation/screen/setting/confrim_location.dart';
 import '../controller/auth_cubit.dart';
 import '../controller/auth_state.dart';

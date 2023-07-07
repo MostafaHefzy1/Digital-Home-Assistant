@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/shared_component/custom_appbar.dart';
 import '../../../../core/shared_component/custom_form_field.dart';
 import '../../../../core/shared_component/custom_material_button.dart';
-import '../../../../core/shared_component/custom_networkimage.dart';
 import '../../../../core/util/app_color.dart';
-import '../../../../core/util/app_images.dart';
 import '../../../../core/util/app_strings.dart';
 import '../../component/label_text.dart';
 
@@ -46,7 +44,9 @@ class EditProfileScreen extends StatelessWidget {
                   child: CustomFormField(
                     type: TextInputType.name,
                     controller: _nameController,
-                    validate: (value) {},
+                    validate: (value) {
+                      return null;
+                    },
                     text: AppStrings.userName,
                   ),
                 ),
@@ -66,7 +66,9 @@ class EditProfileScreen extends StatelessWidget {
                   child: CustomFormField(
                     type: TextInputType.emailAddress,
                     controller: _emailController,
-                    validate: (value) {},
+                    validate: (value) {
+                      return null;
+                    },
                     text: AppStrings.email,
                   ),
                 ),
